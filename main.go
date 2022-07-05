@@ -9,7 +9,16 @@ import (
 	"time"
 )
 
+var (
+	appVersion string = "unset"
+)
+
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "-v" {
+		fmt.Println(appVersion)
+		os.Exit(0)
+	}
+
 	stsOutput, err := ParseAssumeRoleOutput(os.Stdin)
 	if err != nil {
 		log.Fatal(err)
