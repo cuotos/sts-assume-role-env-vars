@@ -17,7 +17,7 @@ func TestParseAssumeRoleOutput(t *testing.T) {
     },
     "AssumedRoleUser": {
         "AssumedRoleId": "AROA...5YCM:danp",
-        "Arn": "arn:aws:sts::979943117323:assumed-role/bwdata-runner-role/danp"
+        "Arn": "arn:aws:sts::111111111111:assumed-role/runner-role/cuotos"
     }
 }`
 
