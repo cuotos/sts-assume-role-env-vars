@@ -50,3 +50,27 @@ export AWS_SESSION_TOKEN=sessionToken`
 
 	assert.Equal(t, expected, actual)
 }
+
+func TestEndToEnd(t *testing.T) {
+	input := `{
+    "Credentials": {
+        "AccessKeyId": "accessKey",
+        "SecretAccessKey": "secretKey",
+        "SessionToken": "sessionToken",
+        "Expiration": "2022-07-05T14:28:30+00:00"
+    },
+    "AssumedRoleUser": {
+        "AssumedRoleId": "AROA...5YCM:danp",
+        "Arn": "arn:aws:sts::111111111111:assumed-role/runner-role/cuotos"
+    }
+}`
+
+	expected := `export AWS_ACCESS_KEY_ID=accessKey
+export AWS_SECRET_ACCESS_KEY=secretKey
+export AWS_SESSION_TOKEN=sessionToken`
+
+	actual, err := run(strings.NewReader(input))
+
+	require.NoError(t, err)
+	assert.Equal(t, expected, actual)
+}
