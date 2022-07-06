@@ -18,12 +18,15 @@ func main() {
 		fmt.Println(appVersion)
 		os.Exit(0)
 	}
+	run(os.Stdin)
+}
 
-	stsOutput, err := ParseAssumeRoleOutput(os.Stdin)
+func run(input io.Reader) (string, error) {
+	stsOutput, err := ParseAssumeRoleOutput(input)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(GenerateSetEnvVarStatement(stsOutput))
+	return GenerateSetEnvVarStatement(stsOutput), nil
 }
 
 func ParseAssumeRoleOutput(input io.Reader) (ParsedAssumeRoleCreds, error) {
