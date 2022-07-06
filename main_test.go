@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestParseAssumeRoleOutput(t *testing.T) {
@@ -27,7 +28,9 @@ func TestParseAssumeRoleOutput(t *testing.T) {
 		SessionToken: "IQoJ...P46W4F/IEX",
 	}
 
-	actual := ParseAssumeRoleOutput(strings.NewReader(input))
+	actual, err := ParseAssumeRoleOutput(strings.NewReader(input))
+
+	require.NoError(t, err)
 
 	assert.Equal(t, expected, actual)
 }
