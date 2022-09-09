@@ -26,7 +26,10 @@ func run(input io.Reader) (string, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return GenerateSetEnvVarStatement(stsOutput), nil
+
+	output := GenerateSetEnvVarStatement(stsOutput)
+	fmt.Println(output)
+	return output, nil
 }
 
 func ParseAssumeRoleOutput(input io.Reader) (ParsedAssumeRoleCreds, error) {
