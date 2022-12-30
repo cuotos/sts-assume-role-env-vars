@@ -10,12 +10,13 @@ import (
 )
 
 var (
-	appVersion string = "unset"
+	version = "unset"
+	commit  = "unset"
 )
 
 func main() {
 	if len(os.Args) > 1 && os.Args[1] == "-v" {
-		fmt.Println(appVersion)
+		fmt.Printf("%s-%s", version, commit)
 		os.Exit(0)
 	}
 	run(os.Stdin)
