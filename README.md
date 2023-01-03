@@ -10,10 +10,11 @@ export AWS_ACCESS_KEY_ID=ASIA....
 export AWS_SECRET_ACCESS_KEY=lakshjdjkahsd
 export AWS_SESSION_TOKEN=askljdakljsd
 ```
+
+just copy and paste these and you'll be using the requested session / role.
+
+
 or if you are even lazier than that
 ```
 $ eval $(aws sts assume-role --role-arn arn:aws:iam::123456789123:role/requested-role --role-session-name a-session-name | sts-assume-role-env-vars)
 ```
-
-just copy and paste these and you'll be using the requested session / role.
-
