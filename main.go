@@ -15,21 +15,28 @@ var (
 )
 
 func main() {
+	log.SetFlags(0)
+
 	if len(os.Args) > 1 && os.Args[1] == "-v" {
 		fmt.Printf("%s-%s", version, commit)
 		os.Exit(0)
 	}
-	run(os.Stdin)
+
+	output, err := run(os.Stdin)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(output)
 }
 
 func run(input io.Reader) (string, error) {
 	stsOutput, err := ParseAssumeRoleOutput(input)
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	output := GenerateSetEnvVarStatement(stsOutput)
-	fmt.Println(output)
 	return output, nil
 }
 
@@ -42,7 +49,7 @@ func ParseAssumeRoleOutput(input io.Reader) (ParsedAssumeRoleCreds, error) {
 
 	err := decoder.Decode(&assumeRoleOutput)
 	if err != nil {
-		return output, nil
+		return output, fmt.Errorf("failed to parse input JSON: %w", err)
 	}
 
 	output.AccessKeyID = assumeRoleOutput.Credentials.AccessKeyID

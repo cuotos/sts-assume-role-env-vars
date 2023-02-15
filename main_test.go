@@ -74,3 +74,14 @@ export AWS_SESSION_TOKEN=sessionToken`
 	require.NoError(t, err)
 	assert.Equal(t, expected, actual)
 }
+
+func TestPassingBadJsonShouldError(t *testing.T) {
+	input := `{
+		"Credentials": {
+			"AccessKeyId": "ASIA...UUP2",
+			"SecretAccessKey": "fYS...in",
+			"Sessio`
+
+	_, err := run(strings.NewReader(input))
+	assert.ErrorContains(t, err, "failed to parse input JSON")
+}
