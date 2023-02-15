@@ -33,3 +33,12 @@ changelog:
       - '^test:'
       - Merge pull request
       - Merge branch
+brews:
+  - tap:
+      owner: cuotos
+      name: homebrew-tap
+      token: "{{ .Env.COMMITTER_TOKEN }}"
+    folder: Formula
+    homepage: "https://github.com/cuotos/sts-assume-role-env-vars"
+    test: |
+      system "#{bin}/foo --version"
